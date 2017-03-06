@@ -192,48 +192,84 @@ EditRow(e)
 }
     
     render() {
- 
+      console.log("this.state.detail is",this.state.detail);
+      console.log("this.state.targetdata is",this.state.targetdata);
+
       const columns= [
-      { title: '行数',
-        dataIndex: 'id',
-        key: 'id',
+      { title: 'note编号',
+        dataIndex: 'course_id',
+        key: 'course_id',
         },
       {
-        title: '条目',
+        title: 'Note名称',
         dataIndex: 'title',
         key: 'title',
       },     
        {
-        title: '描述',
-        dataIndex: 'description',
-        key: 'description',
-      },
-      { title: '操作', dataIndex: '', key: 'x', render: (key,record) =>( 
-        <span>
-        <a onClick={this.RemoveRow.bind(this)} rel={record.id}>删除|</a>
-        <a onClick={this.EditRow.bind(this)} rel={JSON.stringify(record)}>修改</a>
-
-        </span>
-       )}
+        title: 'Usage',
+        dataIndex: 'category',
+        key: 'category',
+      },{
+        title: '',
+        key: 'catelog',
+        dataIndex:'catelog'
+        },
+        {
+          title: '',
+        key: 'catelog2',
+        dataIndex:'catelog2'
+        },
+        {
+        title: 'Product',
+        key: 'product',
+        dataIndex:'product'
+        },
+        {
+        title: 'version',
+        key: 'version',
+        dataIndex:'version'
+        },
 
       ];
    
         return (
         <div  class="workFlowDetailPanel">  
         <Card  title={this.state.targetdata.title} extra={<Icon type="cross" onClick={this.RemoveCard.bind(this)} />}>
+          <div style={{margin:'20px'}}>
+          <h3>Note编号</h3>
+          <p>{this.state.targetdata.course_id}</p>
+          </div>
+          <div style={{margin:'20px'}}>
+          <h3>Note名称</h3>
+          <p>{this.state.targetdata.title}</p>
+          </div>
+          <div style={{margin:'20px'}}>
+          <h3>category</h3>
+          <p>{this.state.targetdata.category}</p>
+          <p>{this.state.targetdata.catelog}</p>
+          <p>{this.state.targetdata.catelog2}</p>
+          </div>
+          <div style={{margin:'20px'}}>
+          <h3>Product</h3>
+          <p>{this.state.targetdata.product}</p>
+          </div>
 
-        <Table dataSource={this.state.detail} columns={columns} pagination={false} />
+          <div style={{margin:'20px'}}>
+          <h3>version</h3>
+          <p>{this.state.targetdata.version}</p>
+          </div>
 
+          <div style={{margin:'20px'}}>
+          <h3>description</h3>
+          <p>{this.state.targetdata.description}</p>
+          </div>
+          
 
-          <Button type="primary" onClick={this.showModal.bind(this)}>新建条目</Button>
-        <CollectionCreateForm 
-          initdata = {this.state.editdata?this.state.editdata:null}
-          ref={this.saveFormRef.bind(this)}
-          visible={this.state.visible}
-          onCancel={this.handleCancel.bind(this)}
-          onCreate={this.handleCreate.bind(this)}
-        />
-        
+          <div style={{margin:'20px'}}>
+          <h3>attachment</h3>
+          <a href={this.state.targetdata.attachments[0].url}>{this.state.targetdata.attachments[0].name}</a>
+          </div>
+
 		</Card>
         </div>
       );

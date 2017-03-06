@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux"
 import {setNodeDragable, setCardDragable,setAreaDropable,handleFocus} from "../../../interactScript";
 import {RemoveCard,AddCardToDisplay} from "../../../Actions/pilotAction";
-import {GetQueryResults,DeletePilot} from "../../../Actions/QueryAction";
+import {GetQueryResults,DeletePilot,getQueryCourses,getSearchResults} from "../../../Actions/QueryAction";
 import {Button,Table,Card,Icon,Form,Modal} from "antd";
 import AnalysisFlight from "./AnalysisFlight"
 import QuerySearchForm from "./QuerySearchForm";
@@ -22,42 +22,22 @@ export default class QueryPanel extends React.Component {
       super(props)
       //columns setup 
       const columns = [{
-              title: '名字',
-              dataIndex: 'name',
-              key: 'name',
-              render: (text,record) => <a href="#" onClick={this.getPersonDetail.bind(this,record)} >{text}</a>,
+              title: 'Note编号',
+              dataIndex: 'course_id',
+              key: 'course_id',
+              render: (text,record) => <a href="#" onClick={this.OpenCourseDetail.bind(this,record)} >{text}</a>,
             }, {
-              title: '公司',
-              dataIndex: 'company',
-              key: 'company',
+              title: 'Note名称',
+              dataIndex: 'title',
+              key: 'title',
             }, {
-              title: '部门',
-              dataIndex: 'department',
-              key: 'department',
+              title: 'Usage',
+              dataIndex: 'category',
+              key: 'category',
             },{
-              title: '等级',
-              dataIndex: 'level.current_level',
-              key: 'level.current_level',
-            },{
-              title: '航段',
-              dataIndex: 'flightinfo.flightRoute',
-              key: 'flightinfo.flightRoute',
-            },{
-              title: '航行时间',
-              dataIndex: 'flightinfo.flightTime',
-              key: 'flightinfo.flightTime',
-            },{
-              title:'操作',
-              key:'action',
-              render: (text, record) => (
-                  <span>
-                     <a href="#" onClick={this.getPersonDetail.bind(this,record)} >查看个人信息</a>
-                    <span className="ant-divider" />
-                    <a href="#">查看晋升信息</a>                    
-                    <span className="ant-divider" />
-                    <a href="#" onClick={this.DeleteConfirm.bind(this,record)}>删除此人</a>
-                  </span>
-                )
+              title: '描述',
+              dataIndex: 'description',
+              key: 'description',
             }];
 
 //end of columns
@@ -69,6 +49,7 @@ export default class QueryPanel extends React.Component {
         FlightAnalysis:false
       }
   }
+
 
 BackToQuery(){
   this.setState({FlightAnalysis:false})
@@ -89,6 +70,27 @@ BackToQuery(){
                     }
                   this.props.dispatch(AddCardToDisplay(cardinfo))
   }
+
+
+  OpenCourseDetail(record)
+{
+  console.log("record ....",record);
+  let course_id = record.course_id;
+  let data = {
+    type:"coursedetail",
+    course_id : course_id,
+    title:record.title,
+    category:record.category,
+    catelog:record.catelog,
+    catelog2:record.catelog2,
+    creationdate:record.creationdate,
+    description:record.description,
+    product:record.product,
+    version:record.version
+  }
+  console.log("data is",data);
+  this.props.dispatch(AddCardToDisplay(data));
+}
 
   componentWillReceiveProps(nextProps)
   {
@@ -111,25 +113,18 @@ BackToQuery(){
     this.handleCancel();
   }
 
+
+
   //mondel ok and cancel
 
-  handleSearch = (e) => {
-  const form = this.form;
-    e.preventDefault();
-  form.validateFields((err, values) => {
-    let querystring = "?"
-      for (let i = 0; i < 5; i++) {
-
-        var selectKey= `field-${i}`;
-        let selectValue = `value-${i}`;
-        if(values[selectKey]!=null&&values[selectValue]!=null)
-        {let string = values[selectKey]+"="+values[selectValue]+"&";
-        querystring=querystring+string;
-        }
-      }
-      this.props.dispatch(GetQueryResults(querystring));
-    });
+  handleSearch(query){
+    this.props.dispatch(getQueryCourses(query));
   }
+
+  handleSearch1(query){
+    this.props.dispatch(getSearchResults(query));
+  }
+
 saveFormRef(form){
   this.form =form;
 }
@@ -224,19 +219,20 @@ let displayQueryPart =
           <QuerySearchForm
                ref={this.saveFormRef.bind(this)}
                handleSearch={this.handleSearch.bind(this)}
+               handleSearch1={this.handleSearch1.bind(this)}
              />
              <Table class="margin-top10" columns={this.state.columns} dataSource={ this.state.pilotsquerydata} footer={()=>{
                 if(this.state.pilotsquerydata.length>0)
                       {
-                        return (
-                          <div>
-                          <Button style={{ marginLeft: 8 }} onClick={this.FlightAnalysis.bind(this)}>
-                                飞行分析
-                              </Button>
-                        <Button style={{ marginLeft: 8 }} onClick={this.ExportToCsv.bind(this)}>
-                                导出
-                              </Button>
-                              </div>)
+                        // return (
+                        //   <div>
+                        //   <Button style={{ marginLeft: 8 }} onClick={this.FlightAnalysis.bind(this)}>
+                        //         飞行分析
+                        //       </Button>
+                        // <Button style={{ marginLeft: 8 }} onClick={this.ExportToCsv.bind(this)}>
+                        //         导出
+                        //       </Button>
+                        //       </div>)
                       }
                       else return ""
                    }} />
@@ -260,7 +256,7 @@ let displayQueryPart =
 
       return (
         <div className="detail-panel">  
-        <Card title="报表系统" extra={<Icon type="cross" onClick={this.RemoveCard.bind(this)} />}>
+        <Card title="搜索note" extra={<Icon type="cross" onClick={this.RemoveCard.bind(this)} />}>
 
         {displayQueryPart}
         </Card>

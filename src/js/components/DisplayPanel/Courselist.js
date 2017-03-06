@@ -30,7 +30,8 @@ export default class Courselist extends React.Component {
       this.state={ 
         visible:false,
         editdata:null,
-        list:Courses
+        list:Courses,
+        courseId:""
       }
 
 
@@ -39,6 +40,8 @@ export default class Courselist extends React.Component {
 
   showModal()
 {
+  const timeStamp = Number(new Date());
+  this.setState({courseId:timeStamp});
   this.setState({visible:true})
 }
 
@@ -49,14 +52,23 @@ export default class Courselist extends React.Component {
 
       }
 
-OpenCourseDetail(e)
+OpenCourseDetail(record)
 {
-
-  let course_id = e.target.rel;
+  console.log("record ....",record);
+  let course_id = record.course_id;
   let data = {
     type:"coursedetail",
-    course_id : course_id
+    course_id : course_id,
+    title:record.title,
+    category:record.category,
+    catelog:record.catelog,
+    catelog2:record.catelog2,
+    creationdate:record.creationdate,
+    description:record.description,
+    product:record.product,
+    version:record.version
   }
+  console.log("data is",data);
   this.props.dispatch(AddCardToDisplay(data));
 }
 
@@ -87,7 +99,8 @@ saveFormRef(form){this.form = form;}
 
     EditRow(e){
        let data1 = JSON.parse(e.target.rel);
-if(data1)
+       console.log("data1 is",data1);
+      if(data1)
     {
       if(data1.attachments)
       {
@@ -176,16 +189,16 @@ if(data1)
 
 //table colume config 
 const columns = [{
-  title: '课程编号',
+  title: 'Note编号',
   dataIndex: 'course_id',
   key: 'course_id',
-  render: (text,record) => <a href="#" onClick={this.OpenCourseDetail.bind(this)} rel={record.course_id}>{text}</a>,
+  render: (text,record) => <a href="#" onClick={this.OpenCourseDetail.bind(this,record)} >{text}</a>,
 }, {
-  title: '课程名字',
+  title: 'Note名称',
   dataIndex: 'title',
   key: 'title',
 }, {
-  title: '课程类型',
+  title: 'Usage',
   dataIndex: 'category',
   key: 'category',
 }, {
@@ -209,19 +222,20 @@ const columns = [{
 
         return (
         <div className="detail-panel">  
-        <Card title="课程列表" extra={<Icon type="cross" onClick={this.RemoveCard.bind(this)} />}>
-        <h1>课程列表</h1>
-        <Button type="primary" onClick={this.showModal.bind(this)}>新建课程</Button>
+        <Card title="Note列表" extra={<Icon type="cross" onClick={this.RemoveCard.bind(this)} />}>
+        <h1>Note列表</h1>
+        <Button type="primary" onClick={this.showModal.bind(this)}>新建Note</Button>
          <Table columns={columns} dataSource={this.state.list}  />
         </Card>
 
 
-        <NewCourseForm
+        <NewCourseForm  
           visible={this.state.visible}
           initdata={this.state.editdata}
           ref={this.saveFormRef.bind(this)}
-            onCancel={this.onCancel.bind(this)}
-            onCreate={this.onCreate.bind(this)}
+          onCancel={this.onCancel.bind(this)}
+          onCreate={this.onCreate.bind(this)}
+          courseId={this.state.courseId}
         />
         </div>
       );

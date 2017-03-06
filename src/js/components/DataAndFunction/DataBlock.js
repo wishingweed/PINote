@@ -24,44 +24,44 @@ onDrop(e){
     render() { 
   var DataItems;
   var topfive = [
-  {ID:"1",
-    NAME:"个人信息",
-    length:"100"
-  },
-  {
-    ID:"2",
-    NAME:"晋升现状",
-    length:"100"
-  },
-  {
-    ID:"3",
-    NAME:"消息",
-    length:"100"
-  },
+  // {ID:"1",
+  //   NAME:"个人信息",
+  //   length:"100"
+  // },
+  // {
+  //   ID:"2",
+  //   NAME:"晋升现状",
+  //   length:"100"
+  // },
+  // {
+  //   ID:"3",
+  //   NAME:"消息",
+  //   length:"100"
+  // },
   {
     ID:"4",
     NAME:"查看流程"
   },
   {
     ID:"5",
-    NAME:"查看课程"
+    NAME:"查看Note"
   },
-  {
-    ID:"6",
-    NAME:"公司概况"
-  },
-  {
-      ID:"7",
-      NAME:"等级设置"
-  },  
+  // {
+  //   ID:"6",
+  //   NAME:"公司概况"
+  // },
+  // {
+  //     ID:"7",
+  //     NAME:"等级设置"
+  // },  
   {
       ID:"8",
-      NAME:"报表系统"
+      NAME:"搜索note"
   },
-  {
-    ID:"10",
-    NAME:"更新飞行信息"
-  }
+  // {
+  //   ID:"10",
+  //   NAME:"更新飞行信息"
+  // }
   ];
 
   var PilotDataBlock = [
@@ -213,7 +213,7 @@ if(role == "ADM")
 return(
   <div className="data-block" data-type="TITLE"> 
     <div className="data-title" >
-      <span> 欢迎登录<br/>国航晋升系统 </span>
+      <span> 欢迎登录<br/> PI Issue Database</span>
     </div>
       { DataItems }
   </div>

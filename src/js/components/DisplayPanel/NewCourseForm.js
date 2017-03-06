@@ -25,13 +25,25 @@ getInitialState(){
   let list = initdata?initdata.attachments:[];
   return {
     attachments:list,
-    fileList:list
+    fileList:list,
+    usage:"Report_Recommendation",
+    catelog1:"Setting"
   }
 },
 
   componentWillReceiveProps(nextProps){
-    console.log(nextProps)
-     
+    const usage = this.props.form.getFieldValue("category");
+    if(usage != "")
+      this.setState({usage:usage}); 
+
+    const catelog1 = this.props.form.getFieldValue("catelog");
+    if(catelog1 != "")
+      this.setState({catelog1:catelog1});
+
+
+    console.log("++++++++++++this.state1 is",this.state);
+
+
     if(nextProps.initdata==null)
     {
       this.setState({attachments:[]});
@@ -82,17 +94,98 @@ onChange(info) {
             },
 onNewCreate(){
    const {form,onCreate} = this.props;
-   console.log(this.state);
+   console.log("this.state is +++",this.state);
    form.setFieldsValue({attachments:this.state.attachments});
     this.props.form.setFieldsValue({attachmentsvalue:this.state.attachments})
    let data = form.getFieldValue("attachments");
    console.log(data)
    onCreate();
 },
-render(){ 
+
+
+
+
+render(){
+  var usage;
+  if(this.state.usage == "Report_Recommendation")
+                usage = 
+                <Select style={{width:200}}>
+                <Option key = "01" value="Setting">Setting</Option>
+                <Option key = "02" value="Code_Check">Code_Check</Option>
+                <Option key = "03" value="Methodolgy">Methodolgy</Option>
+                </Select>
+  if(this.state.usage == "Issue_Handling")
+                usage = 
+                  <Select style={{width:200}}>
+                <Option value="Performance">Performance </Option>
+                <Option value="Configuration">Configuration </Option>
+                <Option value="Administration">Administration </Option>
+              </Select>
+              
+
+  var catelog2;
+  if(this.state.catelog1 == "Setting")
+      catelog2 =
+                <Select style={{width:200}}>
+                <Option key = "01" value="Java_parameter">Java_parameter</Option>
+                <Option key = "02" value="ABAP_parameter">ABAP_parameter</Option>
+                </Select>
+  if(this.state.catelog1 == "Code_Check")
+      {
+        catelog2 =
+                 <Select style={{width:200}}>
+                <Option key = "01" value="proxy ">proxy </Option>
+                <Option key = "02" value="RFC  ">RFC </Option>
+                <Option key = "03" value="Idoc ">Idoc </Option>
+              </Select>
+            console.log("hello world 002")
+
+            }
+  if(this.state.catelog1 == "Methodolgy")
+      catelog2 =
+                 <Select style={{width:200}}>
+                <Option key = "01" value="Cut_Over_Plan ">Cut_Over_Plan </Option>
+                <Option key = "02" value="Upgrade_Plan  ">Upgrade_Plan </Option>
+                <Option key = "03" value="Data_Volume_Management">Data_Volume_Management </Option>
+                <Option key = "04" value="Lifecycle_Management">Lifecycle_Management </Option>
+
+              </Select>
+
+    if(this.state.catelog1 == "Performance")
+    {
+      catelog2 =
+                 <Select style={{width:200}}>
+                <Option key = "01" value="hardware ">hardware </Option>
+                <Option key = "02" value="ABAP_message_queue">ABAP_message_queue </Option>
+                <Option key = "03" value="Java_adapter_queue">Java_adapter_queue </Option>
+              </Select>
+              console.log("hello world 001")
+    }
+    if(this.state.catelog1 == "Configuration")
+      catelog2 =
+                 <Select style={{width:200}}>
+                <Option key = "01" value="adapter ">adapter </Option>
+                <Option key = "02" value="communication_channel">communication_channel </Option>
+                <Option key = "03" value="mapping">mapping </Option>
+                <Option key = "04" value="SLD ">SLD </Option>
+                <Option key = "05" value="routing">routing </Option>
+                <Option key = "06" value="system_parameter">system_parameter </Option>
+              </Select>
+    if(this.state.catelog1 == "Administration")
+      catelog2 =
+                 <Select style={{width:200}}>
+                <Option key = "01" value="system_down ">system_down </Option>
+                <Option key = "02" value="transport">transport </Option>
+                <Option key = "03" value="Monitoring_tool">Monitoring_tool </Option>
+                <Option key = "04" value="Re-orgnization">Re-orgnization </Option>
+              </Select>
+
+
+
    const { visible, onCancel, onCreate, form } = this.props;
     const { getFieldDecorator } = this.props.form;
   const {initdata} =this.props;
+  
     const uploadprops = {
             name: 'file',
             multiple: true,
@@ -101,6 +194,8 @@ render(){
             showUploadList:false  ,
             fileList:this.state.fileList
     };
+
+
     this.state.fileList=this.state.attachments;
     let uploadedfile = <div></div>
     if(this.state.attachments)
@@ -111,46 +206,102 @@ render(){
           });    
     }
 
-    console.log(this.state)
+    const courseId = this.props.courseId;
     return (
       <Modal
         visible={visible}
-        title={initdata?"修改课程":"创建新课程"}
+        title={initdata?"修改Note":"创建新Note"}
         okText="保存"
         onCancel={onCancel}
         onOk={this.onNewCreate.bind(this)}
       >
         <Form vertical>
-          <FormItem label="课程编号">
+          <FormItem label="Nore编号">
             {getFieldDecorator('course_id', {
-              rules: [{ required: true, message: '自定义课程编号' }],
-              initialValue: initdata?initdata.course_id:""
+              rules: [{ required: true, message: '自定义Note编号' }],
+              initialValue: initdata?initdata.course_id:courseId
 
             })(
               <Input />
             )}
           </FormItem>
-                    <FormItem label="课程标题">
+          <FormItem label="Note标题">
             {getFieldDecorator('title', {
-              rules: [{ required: true, message: '请输入课程标题' }],
+              rules: [{ required: true, message: '请输入Note标题' }],
               initialValue: initdata?initdata.title:""
 
             })(
               <Input />
             )}
           </FormItem>
-            <FormItem label="课程类型">
+            <FormItem label="Usage" >
             {getFieldDecorator('category', {
-              rules: [{ required: true, message: '请输入课程标题' }],
+              rules: [{ required: true, message: '' }],
               initialValue: initdata?initdata.category:""
 
             })(
                 <Select style={{width:200}}>
-                <Option value="课程">课程</Option>
-                <Option value="表格">表格</Option>
+                <Option value="Report_Recommendation">Report_Recommendation</Option>
+                <Option value="Issue_Handling">Issue_Handling</Option>
               </Select>
             )}
           </FormItem>
+
+
+          <FormItem label={this.state.usage}>
+            {getFieldDecorator('catelog', {
+              rules: [{ required: true, message: '' }],
+              initialValue: initdata?initdata.catelog:""
+
+            })(
+            usage
+          )}
+          </FormItem>
+          <FormItem label={this.state.catelog1}>
+            {getFieldDecorator('catelog2', {
+              rules: [{ required: true, message: '' }],
+              initialValue: initdata?initdata.catelog2:""
+
+            })(
+            catelog2
+          )}
+          </FormItem>
+
+          <FormItem label="Product" >
+            {getFieldDecorator('product', {
+              rules: [{ required: true, message: '' }],
+              initialValue: initdata?initdata.product:""
+
+            })(
+                <Select style={{width:200}}>
+                <Option value="PI">PI</Option>
+                <Option value="PO">PO</Option>
+                <Option value="AEX">AEX</Option>
+                <Option value="ALL">ALL</Option>
+              </Select>
+            )}
+          </FormItem>
+
+          <FormItem label="version" >
+            {getFieldDecorator('version', {
+              rules: [{ required: true, message: '' }],
+              initialValue: initdata?initdata.version:""
+
+            })(
+                <Select style={{width:200}}>
+                <Option value="7.1x">7.1x</Option>
+                <Option value="7.3">7.3</Option>
+                <Option value="7.31">7.31</Option>
+                <Option value="7.4">7.4</Option>
+                <Option value="7.5">7.5</Option>
+                <Option value="all">all</Option>
+
+              </Select>
+            )}
+          </FormItem>
+
+
+
           <FormItem label="描述">
             {getFieldDecorator('description',
             {initialValue:initdata?initdata.description:""}

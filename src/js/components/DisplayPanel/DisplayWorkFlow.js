@@ -182,7 +182,7 @@ console.log("workflows are",Workflows,this.props);
         return (
         <div className="detail-panel">  
           <Card title="流程列表" extra={<Icon type="cross" onClick={this.RemoveCard.bind(this)} />}>
-          <h1>飞行员训练等级选择</h1>
+          <h1>PI流程</h1>
           <Button type="primary" onClick={this.newWorkflow.bind(this)}>新建流程</Button>
           <Table columns={columns} dataSource={Workflows}  />
           </Card>

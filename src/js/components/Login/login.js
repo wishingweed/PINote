@@ -118,7 +118,7 @@ export default class Login extends React.Component {
       
       
           <div className="login">
-            <p id="km-title">国航晋升系统</p>
+            <p id="km-title">PI Issue Database</p>
 
             <Tabs defaultActiveKey="1"  activeKey={this.state.tab_key} className="login-tab" onChange={this.callback.bind(this)}>
               <TabPane  tab="登录" key="1">           
@@ -133,7 +133,7 @@ export default class Login extends React.Component {
                 help={token.error=="customer_id"?token.hint:""}
               
               >
-                <Input placeholder="身份证号码" onChange={this.CustomerIdChange.bind(this)} ref="cert_id_login"/>             
+                <Input placeholder="I-Number" onChange={this.CustomerIdChange.bind(this)} ref="cert_id_login"/>             
                                
               </FormItem>
               
@@ -180,7 +180,7 @@ export default class Login extends React.Component {
                 <br />
                 <Form horizontal className="reg-form">
                   <FormItem
-                    label="身份证号码:"
+                    label="I-Number:"
                     labelCol={{ span: 7 }}
                     wrapperCol={{ span: 12 }}
                   >

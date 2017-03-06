@@ -10,6 +10,10 @@ var Course = new Schema({
     category:String,
     details:[String],
     owner:String,
+    catelog:String,
+    catelog2:String,
+    product:String,
+    version:String,
     attachments:[{name:String,
     	 filename:String,
     	 url:String

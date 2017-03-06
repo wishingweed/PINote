@@ -397,7 +397,7 @@ export function DeleteCourse(ddata){
   return dispatch=>{
 
     axios.delete("http://localhost:8083/api/courses",{
-                      data:ddata,
+                      data:data,
                       headers:{
                       'X-My-Custom-Header': 'Header-Value',
                       'content-type':'application/json'

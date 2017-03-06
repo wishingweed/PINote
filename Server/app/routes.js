@@ -181,6 +181,7 @@ var xlstojson = require("xlsx-to-json-lc");
 
 //Courses
      app.get('/api/courses', function(req, res) {
+            console.log("req.body is",req.body.data);
             Course.find(req.query,function(err, pilots) {
                 // if there is an error retrieving, send the error. 
                                 // nothing after res.send(err) will execute
@@ -190,6 +191,45 @@ var xlstojson = require("xlsx-to-json-lc");
             });
 
             });
+
+    app.post('/api/courses1',function(req,res)
+    {
+        var query = req.body.data;
+        console.log("query is",query)
+        Course.find(query,function(err,data)
+            {
+               if(err)
+                            res.send(err);
+               res.json(data);
+            }
+            );
+    });
+
+    app.post('/api/courses2',function(req,res)
+    {   
+        var keyword = req.body.data;
+        var reg = new RegExp(keyword,'i');
+
+        Course.find({
+            $or : [ //多条件，数组
+            {title : {$regex : reg}},
+            {description : {$regex : reg}},
+            {category : {$regex : reg}},
+            {catelog : {$regex : reg}},
+            {catelog2 : {$regex : reg}},
+            {product : {$regex : reg}},
+            {version : {$regex : reg}},
+  ]
+        },function(err,data)
+            {
+               if(err)
+                            res.send(err);
+               res.json(data);
+            }
+            );
+    });
+
+
 
 
       app.post('/api/courses', function(req, res) {

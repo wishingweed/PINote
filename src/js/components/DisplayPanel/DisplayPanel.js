@@ -59,7 +59,7 @@ export default class DisplayPanel extends React.Component {
                    var cardinfo ={
                                   type:"fillpersonalinfo"
                                 }
-                  this.props.dispatch(AddCardToDisplay(cardinfo))
+                  // this.props.dispatch(AddCardToDisplay(cardinfo))
 
                 }
             }.bind(this),1000);
