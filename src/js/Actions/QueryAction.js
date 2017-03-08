@@ -8,7 +8,7 @@ export function DeletePilot(cert_id)
 
 return dispatch=>{
 
-    axios.delete("http://localhost:8083/api/pilots",{
+    axios.delete("/api/pilots",{
                       data:{target:{cert_id:cert_id}},
                       headers:{
                       'X-My-Custom-Header': 'Header-Value',
@@ -29,7 +29,7 @@ export function GetQueryResults(data)
 
    console.log("query is",data);
 	 return dispatch=>{
-    axios.get("http://localhost:8083/api/courses"+data,{
+    axios.get("/api/courses"+data,{
        headers:{
         'X-My-Custom-Header': 'Header-Value',
         'content-type':'application/json'
@@ -49,7 +49,7 @@ export function GetQueryResults(data)
 export function getQueryCourses(data) {
         console.log("data is",data)
         return dispatch=>{
-              axios.post("http://localhost:8083/api/courses1",{
+              axios.post("/api/courses1",{
                      data:data,
                      headers:{
                       'X-My-Custom-Header': 'Header-Value',
@@ -70,7 +70,7 @@ export function getQueryCourses(data) {
 export function getSearchResults(data){
   console.log("data is",data);
           return dispatch=>{
-              axios.post("http://localhost:8083/api/courses2",{
+              axios.post("/api/courses2",{
                      data:data,
                      headers:{
                       'X-My-Custom-Header': 'Header-Value',
