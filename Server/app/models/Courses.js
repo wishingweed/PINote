@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var Course = new Schema({
     course_id: String,
     title:String,
+    contact_person:String,
     description:String,
     category:String,
     details:[String],

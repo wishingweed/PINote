@@ -75,7 +75,7 @@ getInitialState(){
 
 onChange(info) {
               const status = info.file.status;
-              let fileList = info.fileList 
+              let fileList = info.fileList
               if (status !== 'uploading') {
                 console.log(info.file, info.fileList);
               }
@@ -216,10 +216,19 @@ render(){
         onOk={this.onNewCreate.bind(this)}
       >
         <Form vertical>
-          <FormItem label="Nore编号">
+          <FormItem label="Note编号">
             {getFieldDecorator('course_id', {
               rules: [{ required: true, message: '自定义Note编号' }],
               initialValue: initdata?initdata.course_id:courseId
+
+            })(
+              <Input />
+            )}
+          </FormItem>
+          <FormItem label="联系人">
+            {getFieldDecorator('contact_person', {
+              rules: [{ required: true, message: '联系人' }],
+              // initialValue: initdata?initdata.contact_person:contact_person
 
             })(
               <Input />
@@ -304,8 +313,10 @@ render(){
 
           <FormItem label="描述">
             {getFieldDecorator('description',
-            {initialValue:initdata?initdata.description:""}
-            )(<Input type="textarea" />)}
+            {
+              rules:[{required: true, message:''}],
+              initialValue:initdata?initdata.description:""}
+            )(<Input type="textarea" rows={15}/>)}
           </FormItem>         
 <FormItem label="已经上传文档">
   {uploadedfile}

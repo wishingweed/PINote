@@ -184,37 +184,9 @@ class CollectionCreateForm1 extends React.Component{
           <FormItem label="描述">
             {getFieldDecorator('description',
             {initialValue:initdata?initdata.description:""}
-            )(<Input type="textarea" />)}
+            )(<Input type="textarea" rows={10}/>)}
           </FormItem>
-           <FormItem label="当前等级">
-            {getFieldDecorator('previous_level', {
-              rules: [{ required: true, message: '请输入当前等级' }],
-              initialValue:initdata?initdata.previous_level:""
-            })(
-                <Select style={{width:200}}>
-                <Option value="F0">F0</Option>
-                <Option value="F1">F1</Option>
-              </Select>
-            )}
-          </FormItem> <FormItem label="目标等级">
-            {getFieldDecorator('target_level', {
-              rules: [{ required: true, message: '请输入课程标题' }],
-              initialValue:initdata?initdata.target_level:""
-            })(
-                <Select style={{width:200}}>
-                <Option value="F1">F1</Option>
-                <Option value="F2">F2</Option>
-              </Select>
-            )}
-          </FormItem>
-          {existingConditions}
-          {formItems}
-          <FormItem {...formItemLayoutWithOutLabel}>
-          <Button type="dashed" onClick={this.add.bind(this)} style={{ width: '60%' }}>
-            <Icon type="plus" /> 增加条件
-          </Button>
-
-          </FormItem>
+           
           <FormItem {...formItemLayoutWithOutLabel}>
           </FormItem>
         </Form>
