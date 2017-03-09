@@ -11,7 +11,6 @@ const CollectionCreateForm = Form.create()(
 getInitialState(){
 
     const { initdata } =this.props;
-    console.log("initdata is",initdata);
     if(initdata)
     { 
       if(initdata.attachments)
@@ -104,6 +103,7 @@ onNewCreate(){
 
 render(){
   var usage;
+  console.log("initdata is",this.props.initdata);
   if(this.state.usage == "Report_Recommendation")
                 usage = 
                 <Select style={{width:200}}>
