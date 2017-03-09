@@ -162,19 +162,20 @@ saveFormRef(form){this.form = form;}
       if (err) {
         return;
       }
-      if(typeof(this.state.editdata)=="undefined" )
+      if(this.state.editdata)
       {
         //add attachments
+        console.log("11111111");
         this.props.dispatch(CreateNewCourse(values));
 
       }
       else
       {
         //find target 
+          console.log("updatedata",updatedata);
           let updatedata = {target:{"course_id": values.course_id},
                       updatepart:values
                     };
-          console.log("updatedata",updatedata);
           this.props.dispatch(EditCourse(updatedata));
       }
     })
