@@ -195,42 +195,6 @@ EditRow(e)
       console.log("this.state.detail is",this.state.detail);
       console.log("this.state.targetdata is",this.state.targetdata);
 
-      const columns= [
-      { title: 'note编号',
-        dataIndex: 'course_id',
-        key: 'course_id',
-        },
-      {
-        title: 'Note名称',
-        dataIndex: 'title',
-        key: 'title',
-      },     
-       {
-        title: 'Usage',
-        dataIndex: 'category',
-        key: 'category',
-      },{
-        title: '',
-        key: 'catelog',
-        dataIndex:'catelog'
-        },
-        {
-          title: '',
-        key: 'catelog2',
-        dataIndex:'catelog2'
-        },
-        {
-        title: 'Product',
-        key: 'product',
-        dataIndex:'product'
-        },
-        {
-        title: 'version',
-        key: 'version',
-        dataIndex:'version'
-        },
-
-      ];
 
       var attachment=[];
       console.log("typeof(this.state.targetdata.attachments)",typeof(this.state.targetdata.attachments.length));
@@ -249,6 +213,10 @@ EditRow(e)
           <div style={{margin:'20px'}}>
           <h3>Note名称</h3>
           <p>{this.state.targetdata.title}</p>
+          </div>
+          <div style={{margin:'20px'}}>
+          <h3>联系人</h3>
+          <p>{this.state.targetdata.contact_person}</p>
           </div>
           <div style={{margin:'20px'}}>
           <h3>category</h3>

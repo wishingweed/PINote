@@ -478,7 +478,6 @@ var xlstojson = require("xlsx-to-json-lc");
 
     app.post('/api/upload_course',upload.single('attachments'),function(req,res,next)
     {
-        console.log("req.file is",req.file);
         if (req.file) {
         res.send(req.file)
     

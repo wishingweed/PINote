@@ -169,7 +169,7 @@ saveFormRef(form){this.form = form;}
         this.props.dispatch(CreateNewCourse(values));
 
       }
-      else
+      if(this.state.editdata!= null)
       {
         //find target 
           console.log("updatedata",updatedata);
