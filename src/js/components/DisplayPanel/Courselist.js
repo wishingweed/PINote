@@ -158,11 +158,11 @@ saveFormRef(form){this.form = form;}
     console.log("attachments is",attachments);
     values.attachments=attachments;
     console.log("values is",values);
-
+    console.log("this.state.editdata",this.state.editdata);
       if (err) {
         return;
       }
-      if(this.state.editdata==null )
+      if(typeof(this.state.editdata)=="undefined" )
       {
         //add attachments
         this.props.dispatch(CreateNewCourse(values));
