@@ -143,7 +143,7 @@ saveFormRef(form){this.form = form;}
                     {let data = {
                       name:one.name,
                        filename:one.response.filename,
-                       url:"/uploads/"+one.response.filename
+                       url:"http://localhost:8083/uploads/"+one.response.filename
                     }
                          return data;
                     } 

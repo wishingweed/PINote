@@ -189,7 +189,7 @@ render(){
     const uploadprops = {
             name: 'file',
             multiple: true,
-            action: 'http://localhost:8083/api/upload_course',
+            action: '/api/upload_course',
             onChange:this.onChange,
             showUploadList:false  ,
             fileList:this.state.fileList
