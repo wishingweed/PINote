@@ -87,6 +87,7 @@ saveFormRef(form){this.form = form;}
 
 
     RemoveRow(e){
+                
                   const deletedata = e;
                   let ddata={"target":{"course_id":deletedata}};
                   this.props.dispatch(DeleteCourse(ddata))
