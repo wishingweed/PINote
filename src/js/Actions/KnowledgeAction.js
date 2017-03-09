@@ -14,7 +14,7 @@ export function ShowPersonalInfo()
   return dispatch =>{
 
   var results;
-  axios.get("http://localhost:8083/api/nerds")
+  axios.get("/api/nerds")
   .then(function (response) {
     console.log("response is !!!!!!!!",response);
     results = response;

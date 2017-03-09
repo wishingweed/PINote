@@ -26,10 +26,10 @@ return dispatch=>{
         
       var cert_id = parameter.cert_id;
       var password = md5(parameter.password);
-      axios.post("http://localhost:8083/api/login",{
+      axios.post("/api/login",{
         cert_id:cert_id,
         password:password
-    },config).then(function(response){
+    }).then(function(response){
 
       if(response.status == 200){
         console.log("response is ",response)
@@ -101,7 +101,7 @@ export function personalInfoRegister(data){
     var name = data.name;    
     var password = md5(data.password);
     
-    axios.post("http://localhost:8083/api/pilots",{
+    axios.post("/api/pilots",{
         cert_id:cert_id,
         name:name,
         password:password,

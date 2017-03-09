@@ -9,7 +9,7 @@ if(!data)
   data = 1
 }
 	 return dispatch=>{
-    axios.get("http://localhost:8083/api/pilots?cert_id="+data,{
+    axios.get("/api/pilots?cert_id="+data,{
        headers:{
         'X-My-Custom-Header': 'Header-Value',
         'content-type':'application/json'
@@ -34,7 +34,7 @@ export function UPDATE_PILOT_DATA(cert_id,pilot_data)
     "updatepart":pilot_data
   }
    return dispatch=>{
-axios.put("http://localhost:8083/api/pilots",{
+axios.put("/api/pilots",{
        data:data,
        headers:{
         'X-My-Custom-Header': 'Header-Value',
@@ -52,7 +52,7 @@ export function UPDATE_PILOT_FLIGHT(target)
 {
 
   return dispatch=>{
-    axios.put("http://localhost:8083/api/flightUpdate",{
+    axios.put("/api/flightUpdate",{
       data:target,
        headers:{
         'X-My-Custom-Header': 'Header-Value',
@@ -82,7 +82,7 @@ export function UPDATE_PILOT_FLIGHT(target)
 export function GetCompanyAll()
 {
   return dispatch=>{
-    axios.get("http://localhost:8083/api/companys",{
+    axios.get("/api/companys",{
                            headers:{
                       'X-My-Custom-Header': 'Header-Value',
                       'content-type':'application/json'
@@ -99,7 +99,7 @@ export function GetCompanyAll()
 export function CreateCompany(data)
 {
   return dispatch=>{
-              axios.post("http://localhost:8083/api/companys",{
+              axios.post("/api/companys",{
                      data:data,
                      headers:{
                       'X-My-Custom-Header': 'Header-Value',
@@ -119,7 +119,7 @@ export function CreateCompany(data)
 export function SubmitMessage(data)
 {
   return dispatch=>{
-      axios.post("http://localhost:8083/api/message",{
+      axios.post("/api/message",{
                      data:data,
                      headers:{
                       'X-My-Custom-Header': 'Header-Value',
@@ -141,7 +141,7 @@ export function SubmitMessage(data)
 export function FetchMessage()
 {
   return dispatch=>{
-    axios.get("http://localhost:8083/api/message",{
+    axios.get("/api/message",{
                            headers:{
                       'X-My-Custom-Header': 'Header-Value',
                       'content-type':'application/json'
@@ -165,7 +165,7 @@ export function UpdateMessage(data1)
     console.log("data is +++++",data)
 
   return dispatch =>{
-    axios.put("http://localhost:8083/api/message",{
+    axios.put("/api/message",{
                      data:data,
                      headers:{
                       'X-My-Custom-Header': 'Header-Value',
@@ -187,7 +187,7 @@ export function UpdateMessage1(data1)
   }
 
   return dispatch =>{
-    axios.put("http://localhost:8083/api/message",{
+    axios.put("/api/message",{
                      data:data,
                      headers:{
                       'X-My-Custom-Header': 'Header-Value',
@@ -206,7 +206,7 @@ export function DeleteCompany(data)
 
   return dispatch=>{
 
-    axios.delete("http://localhost:8083/api/companys",{
+    axios.delete("/api/companys",{
                       data:{company_id:data.company_id},
                       headers:{
                       'X-My-Custom-Header': 'Header-Value',
@@ -225,7 +225,7 @@ export function DeleteCompany(data)
 export function EditCompany(data){
   return dispatch=>{
 
-       axios.put("http://localhost:8083/api/companys",{
+       axios.put("/api/companys",{
                      data:data,
                      headers:{
                       'X-My-Custom-Header': 'Header-Value',
@@ -245,7 +245,7 @@ export function EditCompany(data){
 
 export function ChangeWorkFlow(data){
   return dispatch=>{
-       axios.put("http://localhost:8083/api/workflows",{
+       axios.put("/api/workflows",{
                      data:data,
                      headers:{
                       'X-My-Custom-Header': 'Header-Value',
@@ -304,7 +304,7 @@ export function ChangeWorkflow()
 export function DeleteWorkflowForm(workflowid)
 {
   return dispatch=>{
-    axios.delete("http://localhost:8083/api/workflows",{
+    axios.delete("/api/workflows",{
                       data:{workflow_id:workflowid},
                       headers:{
                       'X-My-Custom-Header': 'Header-Value',
@@ -333,7 +333,7 @@ export function ChangeToModify(workflowid)
 export function GET_ALL_COURSES(){
 
    return dispatch=>{
-    axios.get("http://localhost:8083/api/courses",{
+    axios.get("/api/courses",{
        headers:{
         'X-My-Custom-Header': 'Header-Value',
         'content-type':'application/json'
@@ -353,7 +353,7 @@ export function GET_ALL_COURSES(){
 export function CreateNewCourse(data){
 
       return dispatch=>{
-              axios.post("http://localhost:8083/api/courses",{
+              axios.post("/api/courses",{
                      data:data,
                      headers:{
                       'X-My-Custom-Header': 'Header-Value',
@@ -373,7 +373,7 @@ export function EditCourse(data)
 {
   return dispatch=>{
 
-       axios.put("http://localhost:8083/api/courses",{
+       axios.put("/api/courses",{
                      data:data,
                      headers:{
                       'X-My-Custom-Header': 'Header-Value',
@@ -396,7 +396,7 @@ export function DeleteCourse(ddata){
 
   return dispatch=>{
 
-    axios.delete("http://localhost:8083/api/courses",{
+    axios.delete("/api/courses",{
                       data:data,
                       headers:{
                       'X-My-Custom-Header': 'Header-Value',
@@ -445,7 +445,7 @@ export function SaveStepsSequence(currentWorkflow,steps)
     "updatepart":{"steps":steps}
   }
    return dispatch=>{
-    axios.put("http://localhost:8083/api/workflows",{
+    axios.put("/api/workflows",{
        data:data,
        headers:{
         'X-My-Custom-Header': 'Header-Value',
@@ -464,7 +464,7 @@ export function AddNewWorkFlow(newWorkflow)
   headers:{"Access-Control-Allow-Origin":"*",}
   }
    return dispatch=>{
-      axios.post("http://localhost:8083/api/workflows",newWorkflow,config).then(function (response,err) {
+      axios.post("/api/workflows",newWorkflow,config).then(function (response,err) {
       console.log(response)
       if(response.status == 200)
         dispatch({type:"ADD_NEW_WORK_FLOW",payload:newWorkflow})
@@ -478,7 +478,7 @@ export function InitialWorkflows()
   headers:{"Access-Control-Allow-Origin":"*",}
   }
    return dispatch=>{
-      axios.get("http://localhost:8083/api/workflows"
+      axios.get("/api/workflows"
         ,config).then(function(response,err) {
       console.log("Initial response is",response);
       if(response.status == 200);
@@ -509,7 +509,7 @@ export function AddNewStep(stepName,workflowid)
 export function GetLevels()
 {
      return dispatch=>{
-axios.get("http://localhost:8083/api/levels",{
+axios.get("/api/levels",{
        headers:{
         'X-My-Custom-Header': 'Header-Value',
         'content-type':'application/json'
@@ -528,7 +528,7 @@ axios.get("http://localhost:8083/api/levels",{
  export function upsertLevel(data)
  {
    return dispatch=>{
-axios.put("http://localhost:8083/api/levels",{
+axios.put("/api/levels",{
        data:data,
        headers:{
         'X-My-Custom-Header': 'Header-Value',
@@ -550,7 +550,7 @@ axios.put("http://localhost:8083/api/levels",{
 export function GetWorkflows(data)
 {
 
-    axios.get("http://localhost:8083/api/workflows",{
+    axios.get("/api/workflows",{
        headers:{
         'X-My-Custom-Header': 'Header-Value',
         'content-type':'application/json'
@@ -577,7 +577,7 @@ export function GetDocumnts(cert_id)
     cert_id = "?";
   }
  return dispatch=>{
-axios.get("http://localhost:8083/api/documents"+cert_id,{
+axios.get("/api/documents"+cert_id,{
        headers:{
         'X-My-Custom-Header': 'Header-Value',
         'content-type':'application/json'
@@ -598,7 +598,7 @@ export function CreateDocument(data)
 {
 
       return dispatch=>{
-              axios.post("http://localhost:8083/api/documents",{
+              axios.post("/api/documents",{
                      data:data,
                      headers:{
                       'X-My-Custom-Header': 'Header-Value',
