@@ -162,7 +162,7 @@ saveFormRef(form){this.form = form;}
       if (err) {
         return;
       }
-      if(this.state.editdata)
+      if(this.state.editdata == null)
       {
         //add attachments
         console.log("11111111");
