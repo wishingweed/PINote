@@ -42,12 +42,7 @@ getInitialState(){
 
 
     console.log("++++++++++++this.state1 is",this.state);
-
-
-    if(nextProps.initdata==null)
-    {
-      this.setState({attachments:[]});
-    }
+    console.log("nextProps = ",nextProps);
 
      if(nextProps.initdata)
       {  
@@ -62,6 +57,7 @@ getInitialState(){
       else{
         this.setState({attachments:[]})
       }
+        console.log("initdata.attachments = ",initdata.attachments);
         this.setState({attachments:initdata.attachments})
       }
      },

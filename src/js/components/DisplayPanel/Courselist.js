@@ -135,17 +135,18 @@ saveFormRef(form){this.form = form;}
  form.validateFields((err, values) => {
     let list1 = form.getFieldValue("attachments")
     let attachments=[];
-    console.log(list1);
+    console.log("list1 is",list1);
     if(list1)
    {
-                   attachments = list1.map((one)=>{
-                    if(one.response)
-                    {let data = {
+          attachments = list1.map((one)=>{
+          if(one.response)
+          {
+            let data = {
                       name:one.name,
                        filename:one.response.filename,
                        url:"/uploads/"+one.response.filename
                     }
-                         return data;
+                    return data;
                     } 
                     else 
                     {
@@ -154,7 +155,10 @@ saveFormRef(form){this.form = form;}
 
                   });
     }
-        values.attachments=attachments;
+    console.log("attachments is",attachments);
+    values.attachments=attachments;
+    console.log("values is",values);
+
       if (err) {
         return;
       }
@@ -170,6 +174,7 @@ saveFormRef(form){this.form = form;}
           let updatedata = {target:{"course_id": values.course_id},
                       updatepart:values
                     };
+          console.log("updatedata",updatedata);
           this.props.dispatch(EditCourse(updatedata));
       }
     })
