@@ -225,7 +225,7 @@ render(){
           <FormItem label="联系人">
             {getFieldDecorator('contact_person', {
               rules: [{ required: true, message: '联系人' }],
-              // initialValue: initdata?initdata.contact_person:contact_person
+              initialValue: initdata?initdata.contact_person:""
 
             })(
               <Input />
