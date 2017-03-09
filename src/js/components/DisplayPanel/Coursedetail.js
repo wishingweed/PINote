@@ -200,7 +200,7 @@ EditRow(e)
       console.log("typeof(this.state.targetdata.attachments)",typeof(this.state.targetdata.attachments.length));
       for(let i = 0;i<this.state.targetdata.attachments.length;i++)
       if(typeof(this.state.targetdata.attachments[i])!="undefined"){    
-            attachment.push(<a href={this.state.targetdata.attachments[i].url}>{this.state.targetdata.attachments[i].name}</a>)
+            attachment.push(<p><a href={this.state.targetdata.attachments[i].url}>{this.state.targetdata.attachments[i].name}</a></p>)
       }
    
         return (
