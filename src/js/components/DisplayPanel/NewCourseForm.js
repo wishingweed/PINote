@@ -83,7 +83,7 @@ onChange(info) {
                   let data = {
                       name:info.file.name,
                        filename:info.file.response.filename,
-                       url:"http://localhost:8083/uploads/"+info.file.response.filename};
+                       url:"/uploads/"+info.file.response.filename};
                 this.state.attachments.push(data);
                 message.success(`${info.file.name} file uploaded successfully.`);
               } else if (status === 'error') {
